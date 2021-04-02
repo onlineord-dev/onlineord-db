@@ -2,14 +2,17 @@ import pyodbc
 import pandas as pd
 import numpy as np
 
+driver='{MySQL ODBC 8.0 ANSI Driver}'
+server='den1.mysql4.gear.host'
+database='onlineord'
+username='onlineord'
+password='Bd4tO--2FL7V'
 
+cnxn = pyodbc.connect(Driver='{MySQL ODBC 8.0 ANSI Driver}',Server=server,Database=database,Uid=username,Pwd=password)
+cursor = cnxn.cursor()
 
-conn = pyodbc.connect("DRIVER={ODBC 5.1 Driver};SERVER=;PORT=;DATABASE=;USER=;PASSWORD=;")
-cursor = conn.cursor()
 
 excel = pd.read_excel(r'C:\Users\andri\Desktop\PW\Data\organization.xlsx')
-
-
 
 def LoadData(data):
     for index, row in data.iterrows():
@@ -23,5 +26,5 @@ cursor.execute("SELECT * FROM organization")
 for row in cursor:
     print(row)
 
-conn.commit()
-conn.close()
+cnxn.commit()
+cnxn.close()
